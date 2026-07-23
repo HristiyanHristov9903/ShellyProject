@@ -1,27 +1,42 @@
-# Shelly MQTT Client
+# Shelly MQTT Monitoring System
 
-A Python application that connects to a Mosquitto MQTT broker and receives telemetry data from a Shelly Plug S Gen3 using MQTT.
+## Overview
+
+This project demonstrates an IoT monitoring system using MQTT and Shelly devices.
+
+## Hardware
+
+- Shelly Plug S Gen3
+- Shelly BLU H&T
+- MacBook Air
+- Mosquitto MQTT Broker
+
+## Software
+
+- Python 3
+- paho-mqtt
+- Mosquitto
+- Git
 
 ## Features
 
-- Connects to a local MQTT broker
-- Receives MQTT messages from Shelly Plug S Gen3
-- Displays:
-  - Switch state (ON/OFF)
-  - Power (W)
-  - Current (A)
-  - Temperature (°C)
+- Real-time power monitoring
+- Voltage monitoring
+- Current monitoring
+- Plug temperature monitoring
+- Ambient temperature monitoring
+- Humidity monitoring
+- Battery level monitoring
+- MQTT communication
+- Live terminal dashboard
 
-## Requirements
+## MQTT Topics
 
-- Python 3
-- Mosquitto MQTT Broker
-- paho-mqtt
-
-## Installation
-
-```bash
-pip3 install -r requirements.txt
+```
+shelly/blu/ht
+shelly/blu/ht/temperature
+shelly/blu/ht/humidity
+shelly/blu/ht/battery
 ```
 
 ## Run
@@ -29,3 +44,7 @@ pip3 install -r requirements.txt
 ```bash
 python3 app.py
 ```
+
+## Author
+
+Hristiyan Hristov
