@@ -57,7 +57,7 @@ The application reads Door/Window events from the Shelly RPC event stream and di
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ShellyProject.git
+git clone https://github.com/HristiyanHristov9903/ShellyProject.git
 ```
 
 Install dependencies:
