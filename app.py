@@ -18,6 +18,14 @@ blu = {
     "battery": 0,
 }
 
+door = {
+    "status": "Unknown",
+    "angle": 0,
+    "light": 0,
+    "rssi": 0,
+    "battery": 0,
+}
+
 
 def print_dashboard():
     print("\033[2J\033[H", end="")  # Clear terminal
@@ -39,6 +47,14 @@ def print_dashboard():
     print(f"🌡️ Temperature: {blu['temperature']} °C")
     print(f"💧 Humidity   : {blu['humidity']} %")
     print(f"🔋 Battery    : {blu['battery']} %")
+
+    print("\n🚪 SHELLY BLU DOOR / WINDOW")
+    print("────────────────────────────────────")
+    print(f"🔴 Status   : {door['status']}")
+    print(f"📐 Angle    : {door['angle']}°")
+    print(f"💡 Light    : {door['light']} lx")
+    print(f"📶 RSSI     : {door['rssi']} dBm")
+    print(f"🔋 Battery  : {door['battery']} %")
 
     print("\n══════════════════════════════════════════════")
 
@@ -91,7 +107,23 @@ def on_message(client, userdata, msg):
     elif topic.endswith("/events/rpc"):
 
         params = data.get("params", {})
+        events = params.get("events", [])
 
+        for event in events:
+            if event.get("event") == "shelly-blu":
+
+                d = event.get("data", {})
+
+                if "window" in d:
+                    door["status"] = "Open" if d["window"] else "Closed"
+                    door["angle"] = d.get("rotation", 0)
+                    door["light"] = d.get("illuminance", 0)
+                    door["battery"] = d.get("battery", 0)
+                    door["rssi"] = d.get("rssi", 0)
+
+                    print_dashboard()
+                    return
+                    
         sw = params.get("switch:0")
 
         if sw:
