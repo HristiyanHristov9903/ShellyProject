@@ -1,48 +1,81 @@
-# Shelly MQTT Monitoring System
+# Shelly MQTT Dashboard
 
-## Overview
+A Python application for monitoring Shelly smart devices using MQTT.
 
-This project demonstrates an IoT monitoring system using MQTT and Shelly devices.
+## Project Description
 
-## Hardware
+This project demonstrates how to collect real-time data from Shelly smart devices using the MQTT protocol and display it in a terminal dashboard.
+
+The application receives data from:
 
 - Shelly Plug S Gen3
 - Shelly BLU H&T
-- MacBook Air
-- Mosquitto MQTT Broker
-
-## Software
-
-- Python 3
-- paho-mqtt
-- Mosquitto
-- Git
+- Shelly BLU Door/Window
 
 ## Features
 
-- Real-time power monitoring
-- Voltage monitoring
-- Current monitoring
-- Plug temperature monitoring
-- Ambient temperature monitoring
-- Humidity monitoring
-- Battery level monitoring
-- MQTT communication
-- Live terminal dashboard
+- Real-time MQTT communication
+- Displays plug state (ON/OFF)
+- Displays power consumption
+- Displays voltage and current
+- Displays plug temperature
+- Displays BLU H&T temperature, humidity and battery
+- Displays BLU Door/Window status, angle, light level, RSSI and battery
+
+## Technologies
+
+- Python 3
+- Paho MQTT
+- Mosquitto MQTT Broker
+- Shelly Smart Devices
 
 ## MQTT Topics
 
-```
-shelly/blu/ht
-shelly/blu/ht/temperature
-shelly/blu/ht/humidity
-shelly/blu/ht/battery
-```
+### Shelly Plug S Gen3
 
-## Run
+- `.../status/switch:0`
+- `.../events/rpc`
+
+### Shelly BLU H&T
+
+- `shelly/blu/ht/temperature`
+- `shelly/blu/ht/humidity`
+- `shelly/blu/ht/battery`
+
+### Shelly BLU Door/Window
+
+The application reads Door/Window events from the Shelly RPC event stream and displays:
+
+- Open/Closed status
+- Rotation angle
+- Illuminance
+- RSSI
+- Battery level
+
+## Installation
+
+Clone the repository:
 
 ```bash
-python3 app.py
+git clone https://github.com/YOUR_USERNAME/ShellyProject.git
+```
+
+Install dependencies:
+
+```bash
+pip install paho-mqtt
+```
+
+Start Mosquitto:
+
+```bash
+brew services start mosquitto
+```
+
+Run the application:
+
+```bash
+python app.py
 ```
 
 ## Author
